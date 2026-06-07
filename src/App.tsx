@@ -1,121 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import {ObjectDetails} from './ObjectDetails';
+import DiscoveryForm from './DiscoveryForm';
+
+import './App.css';
+import type {SpaceObject} from "./types.ts";
+
+const initialSpaceObjects = [
+  { id: 1, name: "Mgławica Krab", type: "Pozostałość po supernowej", distance: "6500 lat świetlnych", image: "https://images-assets.nasa.gov/image/PIA22416/PIA22416~thumb.jpg" },
+  { id: 2, name: "Andromeda (M31)", type: "Galaktyka spiralna", distance: "2.5 mln lat świetlnych", image: "https://images-assets.nasa.gov/image/hubble-captures-vibrant-core-of-two-star-clusters-in-andromeda_19478446214_o/hubble-captures-vibrant-core-of-two-star-clusters-in-andromeda_19478446214_o~thumb.jpg" },
+  { id: 3, name: "Jowisz", type: "Gazowy olbrzym", distance: "43 minuty świetlne", image: "https://images-assets.nasa.gov/image/PIA02873/PIA02873~thumb.jpg" },
+  { id: 4, name: "Sagittarius A*", type: "Supermasywna czarna dziura", distance: "26000 lat świetlnych", image: "https://images-assets.nasa.gov/image/PIA16607/PIA16607~thumb.jpg" },
+  { id: 5, name: "Mars", type: "Planeta skalista", distance: "12 minut świetlnych", image: "https://images-assets.nasa.gov/image/PIA02405/PIA02405~thumb.jpg" }
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [objects, setObjects] = useState(initialSpaceObjects);
+  const [selectedObject] = useState(null);
 
+    const handleAddObject = (newObject: Omit<SpaceObject, "id">): void => {
+        const completeObject: SpaceObject = {
+            ...newObject,
+            id: Date.now() // Tutaj generujemy ID dla nowego obiektu
+        };
+        setObjects([...objects, completeObject]);
+    };
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <div className="app-container">
+        <header className="app-header">
+          <h1>🌌 AstroLog - Panel Obserwatorium Astronomicznego</h1>
+        </header>
 
-      <div className="ticks"></div>
+        <div className="app-content">
+          <aside className="sidebar">
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+            <DiscoveryForm onAddObject={handleAddObject} />
+          </aside>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          <main className="main-panel">
+              <ObjectDetails selected={selectedObject} />
+          </main>
+        </div>
+      </div>
+  );
 }
 
-export default App
+export default App;
