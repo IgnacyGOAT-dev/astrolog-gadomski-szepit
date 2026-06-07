@@ -1,0 +1,82 @@
+.astrolog-container {
+    display: flex;
+    width: 100%;
+    border-top: 1px solid var(--border);
+    text-align: left;
+    min-height: 65vh;
+}
+
+.catalog-sidebar {
+    width: 320px;
+    border-right: 1px solid var(--border);
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.catalog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.catalog-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.catalog-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent-border);
+}
+
+.catalog-thumb {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+.catalog-name {
+    font-weight: 500;
+    color: var(--text-h);
+}
+
+.side-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.placeholder-card {
+    flex: 1;
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--social-bg);
+    color: var(--text);
+    text-align: center;
+}
+
+.placeholder-card h3 {
+    margin: 0 0 8px 0;
+    color: var(--accent);
+}
