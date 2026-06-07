@@ -1,30 +1,34 @@
 
-function ObjectDetails({ selectedObject }) {
+import type { SpaceObject } from "./types.ts";
 
-    if (!selectedObject) {
+interface ObjectDetailsProps {
+    selected: SpaceObject | null;
+}
+
+export function ObjectDetails({ selected }: ObjectDetailsProps) {
+    if (!selected) {
         return (
-            <div className="object-details-empty">
-                <h3>🔭 Panel Obserwacyjny</h3>
-                <p>Wskaż cel z katalogu po lewej stronie, aby rozpocząć analizę danych.</p>
+            <div className="placeholder-card details-empty">
+                <h3>🌌 Panel Obserwacyjny</h3>
+                <p style={{ opacity: 0.7 }}>Wskaż cel z katalogu, aby wyświetlić szczegółowe analizy.</p>
             </div>
         );
     }
 
-
     return (
-        <div className="object-details">
-            <h2>🌌 {selectedObject.name}</h2>
-            <img
-                src={selectedObject.imageUrl || "https://via.placeholder.com/300x200?text=Brak+Zdjecia"}
-                alt={selectedObject.name}
-                style={{ maxWidth: '100%', borderRadius: '8px', marginBottom: '15px' }}
-            />
-            <div className="info-group">
-                <p><strong>Typ obiektu:</strong> {selectedObject.type}</p>
-                <p><strong>Odległość od Ziemi:</strong> {selectedObject.distance}</p>
+        <div className="placeholder-card details-active">
+            <h3>🌌 Szczegóły: {selected.name}</h3>
+            <div className="details-content">
+                <img
+                    src={selected.image || "https://via.placeholder.com/300x150?text=Brak+Zdjecia"}
+                    alt={selected.name}
+                    className="details-image"
+                />
+                <div className="details-info">
+                    <p><strong>Typ:</strong> <span className="highlight">{selected.type}</span></p>
+                    <p><strong>Odległość:</strong> <span className="highlight">{selected.distance}</span></p>
+                </div>
             </div>
         </div>
     );
 }
-
-export default ObjectDetails;
