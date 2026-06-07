@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function DiscoveryForm({ onAddObject }) {
     // Lokalne stany dla kontrolowanych inputów
