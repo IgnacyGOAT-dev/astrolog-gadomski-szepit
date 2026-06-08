@@ -1,4 +1,3 @@
-
 import type { SpaceObject } from "./types.ts";
 
 interface ObjectDetailsProps {
@@ -22,7 +21,7 @@ export function ObjectDetails({ selected }: ObjectDetailsProps) {
                 <img
                     src={selected.image || "https://via.placeholder.com/300x150?text=Brak+Zdjecia"}
                     alt={selected.name}
-                    className="details-image"
+                    className="object-detail-image"
                 />
                 <div className="details-info">
                     <p><strong>Typ:</strong> <span className="highlight">{selected.type}</span></p>
